@@ -47,7 +47,7 @@ export default defineConfig({
             '// ==/UserScript=='
           ] 
 
-          fs.writeFileSync('./dist/WPlace-Assist-Tampermonkey.js', lines.join('\n') + '\n\n' + source)
+          fs.writeFileSync('./dist/WPlace-Assist-Tampermonkey.user.js', lines.join('\n') + '\n\n' + source)
         } 
       }
     }

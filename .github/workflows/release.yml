@@ -20,6 +20,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Install the Packages
+        run: bun install
+
       - name: Build WPlace-Assist
         run: bun run build
 

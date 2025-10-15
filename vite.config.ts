@@ -32,7 +32,7 @@ export default defineConfig({
 
       closeBundle() {
         if (fs.existsSync('./dist/WPlace-Assist-Standalone.js')) {
-          const source = 'window.addEventListener(\'load\',()=>{' + fs.readFileSync('./dist/Wplace-Assist-Standalone.js', 'utf8').split('\n')[0] + '})'
+          const source = 'window.addEventListener(\'load\',()=>{' + fs.readFileSync('./dist/WPlace-Assist-Standalone.js', 'utf8').split('\n')[0] + '})'
           const date = new Date()
 
           const lines: string[] = [

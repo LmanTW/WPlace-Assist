@@ -18,7 +18,7 @@ jobs:
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
-        bun-version: latest
+          bun-version: latest
 
       - name: Build WPlace-Assist
         run: bun run build

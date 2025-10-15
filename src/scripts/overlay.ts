@@ -17,6 +17,7 @@ overlayCtx.imageSmoothingEnabled = false
 // Utilities for processing the overlay.
 namespace Overlay {
   export let cached: { [key: string]: Overlay.Chunk } = {} 
+  export let progress: { [key: string]: Overlay.ColorProgress } = {}
 
   // Render a tile.
   export async function renderTile(tileX: number, tileY: number, image: Blob): Promise<Blob> {
@@ -46,35 +47,43 @@ namespace Overlay {
       const overlayData = Image.ctx.getImageData(Math.max(0, -imageRenderX), Math.max(0, -imageRenderY), tileCropWidth, tileCropHeight)
 
       const enabledColors = new Set<number>()
-      const transparent = new Uint8Array([0, 0, 0, 0])
 
       for (const name of State.settings.overlayColors) {
         const color = Palette.colors[name]
 
-        enabledColors.add(Palette.hashColor(color.rgb[0], color.rgb[1], color.rgb[2]))
+        enabledColors.add(Palette.hashColor(color.rgba[0], color.rgba[1], color.rgba[2], color.rgba[3]))
       }
 
       for (let i = 0; i < tileData.data.length; i += 4) {
         if (State.settings.overlayMode === 'image') {
-          if (!enabledColors.has(Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2]))) {
-            overlayData.data.set(transparent, i)
+          if (!enabledColors.has(Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2], overlayData.data[i + 3]))) {
+            overlayData.data.set(Palette.arrays.transparent, i)
           }
         } else if (State.settings.overlayMode === 'progress') {
-          if (!enabledColors.has(Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2]))) {
-            overlayData.data.set(transparent, i)
+          if (!enabledColors.has(Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2], overlayData.data[i + 3]))) {
+            overlayData.data.set(Palette.arrays.transparent, i)
           } else if (tileData.data[i + 3] === 0 && overlayData.data[i + 3] !== 0) {
-            overlayData.data[i] = 128
-            overlayData.data[i + 1] = 128
-            overlayData.data[i + 2] = 128
+            overlayData.data.set(Palette.arrays.gray, i)
           } else if (tileData.data[i] === overlayData.data[i] && tileData.data[i + 1] === overlayData.data[i + 1] && tileData.data[i + 2] === overlayData.data[i + 2] && tileData.data[i + 3] === overlayData.data[i + 3]) {
-            overlayData.data[i] = 0
-            overlayData.data[i + 1] = 255
-            overlayData.data[i + 2] = 0 
+            overlayData.data.set(Palette.arrays.green, i)
           } else {
-            overlayData.data[i] = 255
-            overlayData.data[i + 1] = 0
-            overlayData.data[i + 2] = 0 
+            overlayData.data.set(Palette.arrays.red, i)
           }
+        }
+      }
+      
+      const colorProgressMap = new Map<number, Overlay.ColorProgress>()
+
+      for (let i = 0; i < tileData.data.length; i += 4) {
+        const hash = Palette.hashColor(tileData.data[i], tileData.data[i + 1], tileData.data[i + 2], tileData.data[i + 3])
+        const progress = colorProgressMap.get(hash)
+
+        if (progress === undefined) {
+          if (tileData.data[i + 3] === 0 && overlayData.data[i + 3] !== 0) {
+
+          }
+        } else {
+          progress.total
         }
       }
 
@@ -102,7 +111,10 @@ namespace Overlay {
           if (blob === null) {
             resolve(image)
           } else {
-            Overlay.cached[chunkID] = { hash, blob }
+            Overlay.cached[chunkID] = {
+              hash,
+              blob
+            }
 
             return blob
           }
@@ -116,7 +128,14 @@ namespace Overlay {
   // The data structure of a chunk.
   export interface Chunk {
     hash: string,
-    blob: Blob
+    blob: Blob,
+    progress: { [key: string]: Overlay.ColorProgress }
+  }
+
+  // The data structure of a color progress.
+  export interface ColorProgress {
+    painted: number,
+    total: number
   }
 }
 

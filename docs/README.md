@@ -1,6 +1,6 @@
 # WPlace-Assist
 
-A userscript for [wplace.live](https://wplace.live/) that makes painting easier by selecting the color automatically for you!
+A userscript for [wplace.live](https://wplace.live/) that makes painting easier by selecting the color automatically for you! WPlace-Assist also supports various image and overlay settings, making progress tracking and repairing easier.
 
 ## Installation
 

@@ -209,7 +209,7 @@ export default () => {
                     return (
                       <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                         <input type='checkbox' class='wpa-input-checkbox' checked={State.settings.overlayColors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                        <div style={{ backgroundColor: `rgb(${color.rgb.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                        <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                         <p class='wpa-description'>{name} ({Image.colors[name]})</p>
                       </div>
                     )
@@ -230,7 +230,7 @@ export default () => {
                     return (
                       <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                         <input type='checkbox' class='wpa-input-checkbox' checked={State.settings.overlayColors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                        <div style={{ backgroundColor: `rgb(${color.rgb.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                        <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                         <p class='wpa-wpa-description'>{name} ({Image.colors[name]})</p>
                       </div>
                     )

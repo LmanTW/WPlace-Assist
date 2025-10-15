@@ -28,7 +28,7 @@ jobs:
 
       - name: Gather Release Info
         run: |
-          TAG=$($(jq -r '.version' package.json)
+          TAG=$(jq -r '.version' package.json)
           echo "TAG=v${TAG}" >> $GITHUB_ENV
 
       - name: Create the Release

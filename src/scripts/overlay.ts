@@ -1,8 +1,6 @@
 import Palette from './palette'
 import State from './state'
 import Image from './image'
-import { h } from 'preact'
-import { ImageDown } from 'lucide-react'
 
 const tileCanvas = document.createElement('canvas')
 const tileCtx = tileCanvas.getContext('2d')!
@@ -33,6 +31,7 @@ namespace Overlay {
       const element = await loadImage(image)
 
       tileCtx.clearRect(0, 0, 1000, 1000)
+      tileCtx.globalAlpha = 1
       tileCtx.drawImage(element, 0, 0, 1000, 1000)
 
       const imageRenderX = ((State.image.position.tileX - tileX) * 1000) + State.image.position.localX

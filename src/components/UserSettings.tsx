@@ -31,7 +31,7 @@ export default () => {
     State.updateControl({ gettingAvailableColors: true })
     
     try {
-      State.updateSettings({
+      updateOverlaySettings({
         overlayColors: await Palette.getAvailableColors()
       })
     } catch (error) {
@@ -54,9 +54,9 @@ export default () => {
         }
       })
 
-      State.updateSettings({ overlayColors: colors })
+      updateOverlaySettings({ overlayColors: colors })
     } else {
-      State.updateSettings({ overlayColors: State.settings.overlayColors.filter((name) => Palette.colors[name].paid) })
+      updateOverlaySettings({ overlayColors: State.settings.overlayColors.filter((name) => Palette.colors[name].paid) })
     }
   }
 
@@ -71,9 +71,9 @@ export default () => {
         }
       })
 
-      State.updateSettings({ overlayColors: colors })
+      updateOverlaySettings({ overlayColors: colors })
     } else {
-      State.updateSettings({ overlayColors: State.settings.overlayColors.filter((name) => !Palette.colors[name].paid) })
+      updateOverlaySettings({ overlayColors: State.settings.overlayColors.filter((name) => !Palette.colors[name].paid) })
     }
   }
 
@@ -83,10 +83,10 @@ export default () => {
       if (!toggle) {
         const index = State.settings.overlayColors.indexOf(name)
 
-        State.updateSettings({ overlayColors: [...State.settings.overlayColors.slice(0, index), ...State.settings.overlayColors.slice(index + 1)] })
+        updateOverlaySettings({ overlayColors: [...State.settings.overlayColors.slice(0, index), ...State.settings.overlayColors.slice(index + 1)] })
       }
     } else if (toggle) {
-      State.updateSettings({ overlayColors: [...State.settings.overlayColors, name] })
+      updateOverlaySettings({ overlayColors: [...State.settings.overlayColors, name] })
     }
   }
 

@@ -71,6 +71,9 @@ namespace Intercept {
   // Intercept pixel placement.
   export function interceptPixelPlacement(tileX: number, tileY: number, data: Intercept.PlacementData): PlacementData {
     if (State.settings.overlayShow && (State.image !== null && State.image.position !== null)) {
+      const colors: number[] = []
+      const coords: number[] = []
+
       if (tileX >= State.image.position.tileX && tileX < State.image.position.tileX + Math.ceil((State.image.position.localX + State.image.width) / 1000)) {
         if (tileY >= State.image.position.tileY && tileY < State.image.position.tileY + Math.ceil((State.image.position.localY + State.image.height) / 1000)) {
           for (let i = 0; i < data.coords.length; i += 2) {
@@ -81,13 +84,22 @@ namespace Intercept {
             const hash = Palette.hashColor(color[0], color[1], color[2])
 
             if (color[3] === 0) {
-              data.colors[i / 2] = 0
+              colors.push(0)
+              coords.push(data.coords[i], data.coords[i + 1])
             } else {
-              data.colors[i / 2] = Palette.colors[Palette.colorNameMap.get(hash)!].index
+              const name = Palette.colorNameMap.get(hash)!
+
+              if (State.settings.overlayColors.includes(name)) {
+                colors.push(Palette.colors[Palette.colorNameMap.get(hash)!].index)
+                coords.push(data.coords[i], data.coords[i + 1])
+              }
             }
           }
         }
       }
+
+      data.colors = colors
+      data.coords = coords
     }
 
     return data

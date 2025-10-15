@@ -1,0 +1,31 @@
+# WPlace-Assist
+
+A userscript for [wplace.live](https://wplace.live/) that makes painting easier by selecting the color automatically for you!
+
+## 📦 Installation
+
+WPlace-Assist should work on every browsers that supports [Tampermonkey](https://www.tampermonkey.net/). If it doesn't, please make sure your browser is up to date, as WPlace-Assist relies on some newer browser features.
+
+<details>
+  <summary>**Install on Chrome**</summary>
+  
+  1. Install the [Tampermonkey](https://chromewebstore.google.com/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo?utm_source=item-share-cb) extension (Tampermonkey is a userscript manager).
+  2. Click on the extension and then open the "Manage Extension" page.
+
+  ![An image of opening the "Manage Extension" page](./assets/chrome-install-1.png)
+
+  3. Enable "Developer Mode" and "Allow User Scripts".
+
+  ![An image of the "Manage Extension" page](./assets/chrome-install-2.png)
+
+  4. Click [this link](https://github.com/LmanTW/WPlace-Assist/releases/latest/download/WPlace-Assist-Tampermonkey.user.js) to install WPlace-Assist directly.
+  5. Open or refresh the [wplace.live](https://wplace.live) page.
+</details>
+
+<details>
+  <summary>**Install on Firefox**</summary>
+  
+  1. Install the [Tampermonkey](https://addons.mozilla.org/firefox/addon/tampermonkey) add-on (Tampermonkey is a userscript manager).
+  2. Click [this link](https://github.com/LmanTW/WPlace-Assist/releases/latest/download/WPlace-Assist-Tampermonkey.user.js) to install WPlace-Assist directly.
+  3. Open or refresh the [wplace.live](https://wplace.live) page.
+</details>

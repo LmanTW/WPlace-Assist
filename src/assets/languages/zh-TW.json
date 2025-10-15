@@ -6,45 +6,69 @@
 
   "data": {
     "controlMenu": {
-      "Statistics": "統計資料",
-      "Settings": "設定",
+      "User Settings": "用戶設定",
+      "Close Panel": "關閉面板",
 
       "Upload": "上傳",
       "Upload Image": "上傳圖片",
       "Edit": "編輯",
-      "Edit Image Config": "編輯圖片設定",
+      "Edit Image Config": "編輯圖片配置",
       "Select Position": "選取位置",
       "Select Image Position": "選取圖片位置",
       "Show Overlay": "顯示疊層",
-      "Hide Overlay": "影藏疊層",
+      "Hide Overlay": "隱藏疊成",
       "Toggle Overlay": "切換疊層",
-
       "Save": "儲存",
-      "Save Image Config": "儲存圖片設定",
+      "Save Image Config": "儲存圖片配置",
       "Load": "加載",
-      "Load Image Config": "加載圖片設定"
+      "Load Image Config": "加載圖片配置"
     },
 
     "imageConfig": {
-      "Image Config": "圖片設定",
-      "Reset Image Config": "重置圖片設定",
-      "Close Image Config": "關閉圖片設定",
+      "Image Config": "圖片配置",
+      "Reset Image Config": "重置圖片配置",
+      "Close Image Config": "關閉圖片配置",
 
-      "No image is loaded.": "沒有任何已加載的圖片。",
+      "No image is loaded.": "沒有已加載的圖片。",
 
       "Width": "寬度",
       "Height": "高度",
-      "Lock Aspect Ratio": "鎖定長寬比",
-
+      "Lock Aspect Ratio": "保留長寬比",
       "Palette": "色板",
-      "Select Available": "選取可用的",
-      "Select Available Colors": "選取可用的顏色",
+      "Select Available": "選取可用",
+      "Select All Available Colors": "選取所有可用的顏色",
       "Select All": "全選",
       "Select All Colors": "選取全部的顏色",
-      "Unselect All": "取消全選",
+      "Unselect All": " 取消全選",
       "Unselect All Colors": "取消選取全部的顏色",
-      "Image Dithering (Smoother Color)": "圖片抖動 (更平滑的顏色)",
+      "Image Dithering (Smoother Color)": "抖動圖片 (更平滑的顏色)",
+      "Free Colors": "免費顏色",
+      "Paid Colors": "付費顏色"
+    },
 
+    "userSettings": {
+      "User Settings": "用戶設定",
+      "Reset User Settings": "重置用戶設定",
+      "Close User Settings": "關閉用戶設定",
+
+      "Language": "語言",
+      "Theme": "主題",
+      "Overlay": "疊層",
+      "Mode": "模式",
+      "Image": "圖片",
+      "Progress": "進度",
+      "Background": "背景",
+      "Map": "地圖",
+      "Black": "全黑",
+      "White": "全白",
+      "Opacity": "透明度",
+      "Enable Colors": "啟用顏色",
+      "Select Available": "選取可用",
+      "Select All Available Colors": "選取所有可用的顏色",
+      "Select All": "全選",
+      "Select All Colors": "選取全部的顏色",
+      "Unselect All": " 取消全選",
+      "Unselect All Colors": "取消選取全部的顏色",
       "Free Colors": "免費顏色",
       "Paid Colors": "付費顏色"
     }

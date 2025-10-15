@@ -31,8 +31,11 @@ jobs:
           TAG=$(jq -r '.version' package.json)
           echo "TAG=v${TAG}" >> $GITHUB_ENV
 
+      - name: Test
+        run: ls ./dist
+
       - name: Create the Release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.TAG }}
-          artifacts: ./dist/WPlace-Assist-Standalone.js, ./dist/WPlace-Assist-Tampermonkey.js
+          artifacts: ./dist/WPlace-Assist-Standalone.js,./dist/WPlace-Assist-Tampermonkey.js

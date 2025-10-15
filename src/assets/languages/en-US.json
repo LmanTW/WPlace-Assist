@@ -1,0 +1,76 @@
+{
+  "info": {
+    "name": "English",
+    "flag": "🇺🇸"
+  },
+
+  "data": {
+    "controlMenu": {
+      "User Settings": "User Settings",
+      "Close Panel": "Close Panel",
+
+      "Upload": "Upload",
+      "Upload Image": "Upload Image",
+      "Edit": "Edit",
+      "Edit Image Config": "Edit Image Config",
+      "Select Position": "Select Position",
+      "Select Image Position": "Select Image Position",
+      "Show Overlay": "Show Overlay",
+      "Hide Overlay": "Hide Overlay",
+      "Toggle Overlay": "Toggle Overlay",
+      "Save": "Save",
+      "Save Image Config": "Save Image Config",
+      "Load": "Load",
+      "Load Image Config": "Load Image Config"
+    },
+
+    "imageConfig": {
+      "Image Config": "Image Conig",
+      "Reset Image Config": "Reset Image Config",
+      "Close Image Config": "Close Image Config",
+
+      "No image is loaded.": "No image is loaded.",
+
+      "Width": "Width",
+      "Height": "Height",
+      "Lock Aspect Ratio": "Lock Aspect Ratio",
+      "Palette": "Palette",
+      "Select Available": "Select Available",
+      "Select All Available Colors": "Select All Available Colors",
+      "Select All": "Select All",
+      "Select All Colors": "Select All Colors",
+      "Unselect All": "Unselect All",
+      "Unselect All Colors": "Unselect All Colors",
+      "Image Dithering (Smoother Color)": "Image Dithering (Smoother Color)",
+      "Free Colors": "Free Colors",
+      "Paid Colors": "Paid Colors"
+    },
+
+    "userSettings": {
+      "User Settings": "User Settings",
+      "Reset User Settings": "Reset User Settings",
+      "Close User Settings": "Close User Settings",
+
+      "Language": "Language",
+      "Theme": "Theme",
+      "Overlay": "Overlay",
+      "Mode": "Mode",
+      "Image": "Image",
+      "Progress": "Progress",
+      "Background": "Background",
+      "Map": "Map",
+      "Black": "Black",
+      "White": "White",
+      "Opacity": "Opacity",
+      "Enable Colors": "Enable Colors",
+      "Select Available": "Select Available",
+      "Select All Available Colors": "Select All Available Colors",
+      "Select All": "Select All",
+      "Select All Colors": "Select All Colors",
+      "Unselect All": "Unselect All",
+      "Unselect All Colors": "Unselect All Colors",
+      "Free Colors": "Free Colors",
+      "Paid Colors": "Paid Colors"
+    }
+  }
+}

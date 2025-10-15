@@ -1,0 +1,35 @@
+name: Release WPlace-Assist
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release WPlace-Assist
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+        bun-version: latest
+
+      - name: Build WPlace-Assist
+        run: bun run build
+
+      - name: Gather Release Info
+        run: |
+          TAG=$($(jq -r '.version' package.json)
+          echo "TAG=v${TAG}" >> $GITHUB_ENV
+
+      - name: Create the Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.TAG }}
+          artifacts: ./dist/WPlace-Assist-Standalone.js, ./dist/WPlace-Assist-Tempermonkey.js

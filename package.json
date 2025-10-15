@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0",
+
+  "scripts": {
+    "build": "vite build"
+  },
+
+  "dependencies": {
+    "@msgpack/msgpack": "^3.1.2",
+    "@preact/signals": "^2.3.1",
+    "lucide-react": "^0.544.0",
+    "preact": "^10.27.2",
+    "preact-transitioning": "^1.5.2",
+    "rollup-plugin-visualizer": "^6.0.3"
+  },
+
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "vite": "^7.1.7"
+  }
+}

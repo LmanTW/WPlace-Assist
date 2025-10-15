@@ -1,0 +1,52 @@
+{
+  "info": {
+    "name": "繁體中文",
+    "flag": "🇹🇼"
+  },
+
+  "data": {
+    "controlMenu": {
+      "Statistics": "統計資料",
+      "Settings": "設定",
+
+      "Upload": "上傳",
+      "Upload Image": "上傳圖片",
+      "Edit": "編輯",
+      "Edit Image Config": "編輯圖片設定",
+      "Select Position": "選取位置",
+      "Select Image Position": "選取圖片位置",
+      "Show Overlay": "顯示疊層",
+      "Hide Overlay": "影藏疊層",
+      "Toggle Overlay": "切換疊層",
+
+      "Save": "儲存",
+      "Save Image Config": "儲存圖片設定",
+      "Load": "加載",
+      "Load Image Config": "加載圖片設定"
+    },
+
+    "imageConfig": {
+      "Image Config": "圖片設定",
+      "Reset Image Config": "重置圖片設定",
+      "Close Image Config": "關閉圖片設定",
+
+      "No image is loaded.": "沒有任何已加載的圖片。",
+
+      "Width": "寬度",
+      "Height": "高度",
+      "Lock Aspect Ratio": "鎖定長寬比",
+
+      "Palette": "色板",
+      "Select Available": "選取可用的",
+      "Select Available Colors": "選取可用的顏色",
+      "Select All": "全選",
+      "Select All Colors": "選取全部的顏色",
+      "Unselect All": "取消全選",
+      "Unselect All Colors": "取消選取全部的顏色",
+      "Image Dithering (Smoother Color)": "圖片抖動 (更平滑的顏色)",
+
+      "Free Colors": "免費顏色",
+      "Paid Colors": "付費顏色"
+    }
+  }
+}

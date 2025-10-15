@@ -1,0 +1,202 @@
+:root {
+  --wpa-color-foreground: var(--color-base-content);
+
+  --wpa-color-container-light: var(--color-base-100);
+  --wpa-color-container-medium: var(--color-base-200);
+  --wpa-color-container-dark: var(--color-base-300);
+
+  --wpa-color-accent-background: var(--color-primary);
+  --wpa-color-accent-foreground: var(--color-primary-content);
+
+  --wpa-size-large: 1.4rem;
+  --wpa-size-big: 1.3rem;
+  --wpa-size-medium: 1.2rem;
+  --wpa-size-small: 1.1rem;
+  --wpa-size-tiny: 1;
+
+  --wpa-spacing-large: 2rem;
+  --wpa-spacing-big: 1.5rem;
+  --wpa-spacing-medium: 1rem;
+  --wpa-spacing-small: 0.5rem;
+  --wpa-spacing-tiny: 0.25rem
+}
+
+.wpa-title-1 {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-large);
+  font-weight: 600;
+  text-wrap: nowrap;
+  margin: 0rem
+}
+
+.wpa-title-2 {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-big);
+  font-weight: 600;
+  text-wrap: nowrap;
+  margin: 0rem
+}
+
+.wpa-title-3 {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-medium);
+  font-weight: 600;
+  text-wrap: nowrap;
+  margin: 0rem
+}
+
+.wpa-title-4 {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-small);
+  font-weight: 600;
+  text-wrap: nowrap;
+  margin: 0rem
+}
+
+.wpa-title-5 {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-tiny);
+  font-weight: 600;
+  text-wrap: nowrap;
+  margin: 0rem
+}
+
+.wpa-description {
+  color: var(--wpa-color-foreground);
+  font-size: var(--wpa-size-tiny);
+  font-weight: 400;
+  margin: 0rem
+}
+
+.wpa-container-light {
+  background-color: var(--wpa-color-container-light)
+}
+
+.wpa-container-dark {
+  background-color: var(--wpa-color-container-dark)
+}
+
+.wpa-container-big {
+  border-radius: 1.25rem
+}
+
+.wpa-container-small {
+  border-radius: 0.75rem
+}
+
+.wpa-container-shadow {
+  box-shadow: 0rem 0rem 1rem 0rem rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0rem 0rem 1rem 0rem rgba(0,0,0,0.5);
+  -moz-box-shadow: 0rem 0rem 1rem 0rem rgba(0,0,0,0.5)
+}
+
+.wpa-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--wpa-color-foreground);
+  background-color: var(--wpa-color-container-medium);
+  border: var(--border) solid color-mix(in oklab, var(--wpa-color-container-medium), #000 calc(var(--depth) * 5%));
+  border-radius: var(--radius-field);
+  box-sizing: border-box;
+  font-weight: 600;
+  font-size: 0.875rem;
+  height: 2.25rem;
+  padding: 0rem 1rem;
+  transition-property: color, background-color, opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0,0,.2,1);
+  cursor: pointer;
+}
+
+.wpa-button:not(.wpa-button-primary):hover {
+  background-color: color-mix(in oklab, var(--btn-color, var(--wpa-color-container-medium)), #000 7%);
+  border: var(--border) solid color-mix(in oklab, color-mix(in oklab, var(--btn-color, var(--wpa-color-container-medium)), #000 7%), #000 calc(var(--depth) * 5%))
+}
+
+.wpa-button:not(.wpa-button-primary):active {
+  background-color: color-mix(in oklab, var(--btn-color, var(--wpa-color-container-medium)), #000 5%);
+  border: var(--border) solid color-mix(in oklab, color-mix(in oklab, var(--btn-color, var(--wpa-color-container-medium)), #000 5%), #000 calc(var(--depth) * 5%));
+  transform: translateY(0.5px)
+}
+
+.wpa-button:disabled {
+  opacity: 0.5;
+  cursor: default
+}
+
+.wpa-button-primary {
+  color: var(--wpa-color-accent-foreground);
+  background-color: var(--wpa-color-accent-background);
+  border: var(--border) solid color-mix(in oklab, var(--wpa-color-accent-background), #000 calc(var(--depth) * 5%))
+}
+
+.wpa-button-primary:hover {
+  background-color: color-mix(in oklab, var(--btn-color, var(--wpa-color-accent-background)), #000 7%);
+  border: var(--border) solid color-mix(in oklab, color-mix(in oklab, var(--btn-color, var(var(--wpa-color-accent-background))), #000 7%), #000 calc(var(--depth) * 5%))
+}
+
+.wpa-button-primary:active {
+  background-color: color-mix(in oklab, var(--btn-color, var(--wpa-color-accent-background)), #000 5%);
+  border: var(--border) solid color-mix(in oklab, color-mix(in oklab, var(--btn-color, var(var(--wpa-color-accent-background))), #000 5%), #000 calc(var(--depth) * 5%));
+  transform: translateY(0.5px)
+}
+
+.wpa-input-text {
+  appearance: none;
+  align-items: center;
+  color: var(--wpa-color-foreground);
+  background-color: var(--wpa-color-container-medium);
+  border: var(--border) solid color-mix(in oklab, var(--color-base-content) 20%, #0000);
+  border-radius: var(--radius-field);
+  box-sizing: border-box;
+  font-size: var(--wpa-size-tiny);
+  height: 2.25rem;
+  padding: 0rem 0.75rem;
+  cursor: text
+}
+
+.wpa-input-text:focus {
+  border: var(--border) solid var(--wpa-color-foreground)
+}
+
+.wpa-input-text:focus-within {
+  border: var(--border) solid var(--wpa-color-foreground)
+}
+
+.wpa-input-checkbox {
+  appearance: none;
+  background-color: var(--wpa-color-container-medium);
+  border: var(--border) solid color-mix(in oklab, var(--color-base-content) 20%, #0000);
+  border-radius: 0.1rem;
+  box-sizing: border-box;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer
+}
+
+.wpa-input-checkbox:checked {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--wpa-color-accent-foreground);
+  background-color: var(--wpa-color-accent-background);
+  border: var(--border) solid color-mix(in oklab, var(--wpa-color-accent-background), #000 calc(var(--depth) * 5%))  
+}
+
+.wpa-input-checkbox:checked::after {
+  content: "✓";
+  color: var(--wpa-color-accent-foreground);
+  font-size: 0.9rem;
+}
+
+.wpa-select {
+  color: var(--wpa-color-foreground);
+  background-color: var(--wpa-color-container-medium);
+  border: var(--border) solid color-mix(in oklab, var(--color-base-content) 20%, #0000);
+  border-radius: var(--radius-field);
+  font-size: var(--wpa-size-tiny);
+  height: 2.25rem;
+  padding: 0rem 0.75rem;
+  cursor: pointer
+}

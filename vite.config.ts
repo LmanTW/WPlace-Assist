@@ -31,7 +31,7 @@ export default defineConfig({
       name: 'Tempermonkey',
 
       closeBundle() {
-        if (fs.existsSync('./dist/Wplace-Assist-Standalone.js')) {
+        if (fs.existsSync('./dist/WPlace-Assist-Standalone.js')) {
           const source = 'window.addEventListener(\'load\',()=>{' + fs.readFileSync('./dist/Wplace-Assist-Standalone.js', 'utf8').split('\n')[0] + '})'
           const date = new Date()
 

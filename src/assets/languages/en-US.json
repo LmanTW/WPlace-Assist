@@ -84,10 +84,6 @@
       "Select All Colors": "Select All Colors",
       "Unselect All": "Unselect All",
       "Unselect All Colors": "Unselect All Colors"
-    },
-
-    "actionTip": {
-      "Select a pixel to set the position of the image.": "Select a pixel to set the position of the image."
     }
   }
 }

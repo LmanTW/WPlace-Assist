@@ -2,6 +2,11 @@
 
 A userscript for [wplace.live](https://wplace.live/) that makes painting easier by selecting the color automatically for you! WPlace-Assist also supports various image and overlay settings, making progress tracking and repairing easier.
 
+![An image of WPlace-Assist running](./assets/demo.png)
+
+> [!WARNING]
+> Although I personally don't consider this as botting, this might still violate the rules. Please use this at your own risk.
+
 ## Installation
 
 WPlace-Assist should work on every browsers that supports [Tampermonkey](https://www.tampermonkey.net/). If it doesn't, please make sure your browser is up to date, as WPlace-Assist relies on some newer browser features.

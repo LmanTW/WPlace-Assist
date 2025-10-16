@@ -70,15 +70,6 @@ export default () => {
     input.click()
   }
 
-  // Get an action tip.
-  const getActionTip = (): null | string => {
-    if (State.control.selectPosition) {
-      return Language.translate('actionTip', 'Select a pixel to set the position of the image.')
-    }
-
-    return null
-  }
-
   // Save a config.
   const saveConfig = async (): Promise<void> => { 
     const data = encode(State.image)
@@ -154,8 +145,6 @@ export default () => {
     }
   })
 
-  const actionTip = getActionTip()
-
   return (
     <StyleTransition
       in={State.layout.controlMenu}
@@ -196,14 +185,6 @@ export default () => {
             <lucid.LocateFixed size='20' style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
             {Language.translate('controlMenu', 'Select Position')}
           </button>
-
-          {
-            actionTip !== null && (
-              <div class='wpa-container-accent wpa-container-small' style={{ display: 'flex', flexDirection: 'column', gap: 'var(--wpa-spacing-small)', minHeight: '0rem', padding: 'var(--wpa-spacing-medium)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}> 
-                <p class='wpa-description' style={{ color: 'var(--wpa-color-accent-foreground)', textWrap: 'wrap' }}>{actionTip}</p>
-              </div> 
-            )
-          }
 
           <button class='wpa-button' title={Language.translate('controlMenu', 'Toggle Overlay')} disabled={State.image === null} onClick={() => State.updateSettings({ overlayShow: !State.settings.overlayShow })} style={{ flex: 1, width: '100%', height: '2.25rem', marginBottom: 'var(--wpa-spacing-small)' }}>
             {

@@ -77,6 +77,10 @@
   background-color: var(--wpa-color-container-dark)
 }
 
+.wpa-container-accent {
+  background-color: var(--wpa-color-accent-background)
+}
+
 .wpa-container-big {
   border-radius: 1.25rem
 }

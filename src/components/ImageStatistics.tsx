@@ -30,9 +30,9 @@ export default () => {
       }}
     >
       <div ref={backgroundReference} onClick={handleBackgroundClick} style={{ position: 'fixed', display: 'flex', justifyContent: 'center', alignItems: 'center', left: '0rem', top: '0rem', width: '100dvw', height: '100dvh', backdropFilter: 'brightness(0.5) blur(0.5rem)', transition: 'opacity 0.3s', cursor: 'pointer', zIndex: 999 }}>
-        <div class='wpa-container-light wpa-shadow' style={{ display: 'flex', flexDirection: 'column', borderRadius: '1.25rem', width: '40rem', maxHeight: 'calc(100dvh - calc(var(--wpa-spacing-medium) * 2))', cursor: 'default', overflow: 'hidden' }}>
+        <div class='wpa-container-light wpa-shadow' style={{ display: 'flex', flexDirection: 'column', borderRadius: '1.25rem', width: '40rem', maxHeight: 'calc(100dvh - calc(var(--wpa-spacing-medium) * 2))', cursor: 'auto', overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--wpa-spacing-small)', borderBottom: '0.1rem solid var(--wpa-color-container-dark)', padding: 'var(--wpa-spacing-medium)' }}>
-            <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none' }}>{Language.translate('common', 'Image Statistics')}</h3>
+            <h3 class='wpa-title-3' style={{ flex: 1 }}>{Language.translate('common', 'Image Statistics')}</h3>
 
             <button class='wpa-button' title={Language.translate('imageStatistics', 'Close Image Statistics')} onClick={() => State.updateLayout({ imageStatistics: false })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
               <lucid.X size='16'/>

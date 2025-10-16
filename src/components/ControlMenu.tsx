@@ -5,7 +5,6 @@ import * as lucid from 'lucide-react'
 
 import Language from '../scripts/language'
 import Palette from '../scripts/palette'
-import Overlay from '../scripts/overlay'
 import State from '../scripts/state'
 
 // The control menu component.
@@ -69,6 +68,15 @@ export default () => {
     input.type = 'file'
     input.accept = 'image/png,image/jpeg,image/webp'
     input.click()
+  }
+
+  // Get an action tip.
+  const getActionTip = (): null | string => {
+    if (State.control.selectPosition) {
+      return Language.translate('actionTip', 'Select a pixel to set the position of the image.')
+    }
+
+    return null
   }
 
   // Save a config.
@@ -146,6 +154,8 @@ export default () => {
     }
   })
 
+  const actionTip = getActionTip()
+
   return (
     <StyleTransition
       in={State.layout.controlMenu}
@@ -158,7 +168,7 @@ export default () => {
     >
       <div ref={menuReference} class='wpa-container-light wpa-container-big wpa-container-shadow' style={{ position: 'fixed', display: 'block', left: '2rem', top: '2rem', width: '20rem', transition: 'opacity 0.3s, transform 0.3s', overflow: 'hidden', zIndex: 998 }}>
         <div ref={navbarReference} style={{ display: 'flex', alignItems: 'center', gap: 'var(--wpa-spacing-small)', borderBottom: '0.1rem solid var(--wpa-color-container-dark)', padding: 'var(--wpa-spacing-medium)', cursor: (startState === null) ? 'grab' : 'grabbing' }}>
-          <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none', pointerEvents: 'none' }}>WPlace Assist</h3>
+          <h3 class='wpa-title-3' style={{ flex: 1, pointerEvents: 'none' }}>WPlace Assist</h3>
         
           <button class='wpa-button' title={Language.translate('common', 'Image Statistics')} onClick={() => State.updateLayout({ imageStatistics: true })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
             <lucid.ChartColumnIncreasing size='16'/>
@@ -188,9 +198,11 @@ export default () => {
           </button>
 
           {
-            <div class='wpa-container-dark wpa-container-small' style={{ height: '15rem', minHeight: '0rem', padding: 'var(--wpa-spacing-medium)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}> 
-              WIP
-            </div> 
+            actionTip !== null && (
+              <div class='wpa-container-accent wpa-container-small' style={{ display: 'flex', flexDirection: 'column', gap: 'var(--wpa-spacing-small)', minHeight: '0rem', padding: 'var(--wpa-spacing-medium)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}> 
+                <p class='wpa-description' style={{ color: 'var(--wpa-color-accent-foreground)', textWrap: 'wrap' }}>{actionTip}</p>
+              </div> 
+            )
           }
 
           <button class='wpa-button' title={Language.translate('controlMenu', 'Toggle Overlay')} disabled={State.image === null} onClick={() => State.updateSettings({ overlayShow: !State.settings.overlayShow })} style={{ flex: 1, width: '100%', height: '2.25rem', marginBottom: 'var(--wpa-spacing-small)' }}>

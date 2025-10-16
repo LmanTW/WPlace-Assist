@@ -99,5 +99,3 @@ window.fetch = async (input: URL | RequestInfo, init?: RequestInit): Promise<Res
 
   return originalFetch.call(this, input, init)
 }
-
-

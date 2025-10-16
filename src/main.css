@@ -65,6 +65,7 @@
   color: var(--wpa-color-foreground);
   font-size: var(--wpa-size-tiny);
   font-weight: 400;
+  text-wrap: nowrap;
   margin: 0rem
 }
 

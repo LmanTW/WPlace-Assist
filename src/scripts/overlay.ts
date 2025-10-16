@@ -1,6 +1,7 @@
 import Palette from './palette'
 import State from './state'
 import Image from './image'
+import { signal } from '@preact/signals'
 
 const tileCanvas = document.createElement('canvas')
 const tileCtx = tileCanvas.getContext('2d')!
@@ -17,10 +18,12 @@ overlayCtx.imageSmoothingEnabled = false
 // Utilities for processing the overlay.
 namespace Overlay {
   export let cached: { [key: string]: Overlay.Chunk } = {} 
-  export let progress: { [key: string]: Overlay.ColorProgress } = {}
+  export let progress = signal<{ [key: string]: Overlay.ColorProgress }>({})
 
   // Render a tile.
   export async function renderTile(tileX: number, tileY: number, image: Blob): Promise<Blob> {
+    const start = performance.now()
+
     if (State.image !== null && State.image.position !== null) {
       const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', await image.arrayBuffer())).toHex();
       const chunkID = `${tileX}-${tileY}` 
@@ -54,6 +57,26 @@ namespace Overlay {
         enabledColors.add(Palette.hashColor(color.rgba[0], color.rgba[1], color.rgba[2], color.rgba[3]))
       }
 
+      const colorMap = new Map<number, Overlay.ColorProgress>()
+
+      for (let i = 0; i < tileData.data.length; i += 4) {
+        const hash = Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2], overlayData.data[i + 3])
+        const progress = colorMap.get(hash)
+
+        if (progress === undefined) {
+          colorMap.set(hash, {
+            painted: (overlayData.data[i] === tileData.data[i] && overlayData.data[i + 1] === tileData.data[i + 1] && overlayData.data[i + 2] === tileData.data[i + 2] && overlayData.data[i + 3] === tileData.data[i + 3]) ? 1 : 0,
+            total: 1
+          })
+        } else {
+          progress.total++
+
+          if (tileData.data[i] === overlayData.data[i] && tileData.data[i + 1] === overlayData.data[i + 1] && tileData.data[i + 2] === overlayData.data[i + 2] && tileData.data[i + 3] === overlayData.data[i + 3]) {
+            progress.painted++
+          }
+        }
+      }
+
       for (let i = 0; i < tileData.data.length; i += 4) {
         if (State.settings.overlayMode === 'image') {
           if (!enabledColors.has(Palette.hashColor(overlayData.data[i], overlayData.data[i + 1], overlayData.data[i + 2], overlayData.data[i + 3]))) {
@@ -69,21 +92,6 @@ namespace Overlay {
           } else {
             overlayData.data.set(Palette.arrays.red, i)
           }
-        }
-      }
-      
-      const colorProgressMap = new Map<number, Overlay.ColorProgress>()
-
-      for (let i = 0; i < tileData.data.length; i += 4) {
-        const hash = Palette.hashColor(tileData.data[i], tileData.data[i + 1], tileData.data[i + 2], tileData.data[i + 3])
-        const progress = colorProgressMap.get(hash)
-
-        if (progress === undefined) {
-          if (tileData.data[i + 3] === 0 && overlayData.data[i + 3] !== 0) {
-
-          }
-        } else {
-          progress.total
         }
       }
 
@@ -113,8 +121,11 @@ namespace Overlay {
           } else {
             Overlay.cached[chunkID] = {
               hash,
-              blob
+              blob,
+              colors: Object.fromEntries(Array.from(colorMap.entries()).map((entry) => [Palette.colorNameMap.get(entry[0]), entry[1]]))
             }
+
+            Overlay.updateProgress()
 
             return blob
           }
@@ -125,11 +136,31 @@ namespace Overlay {
     return image
   }
 
+  // Update the progress.
+  export function updateProgress(): void {
+    const progress: { [key: string]: Overlay.ColorProgress } = {}
+
+    for (const chunkID of Object.keys(Overlay.cached)) {
+      const chunk = Overlay.cached[chunkID]
+
+      for (const name of Object.keys(chunk.colors)) {
+        if (progress[name] === undefined) {
+          progress[name] = chunk.colors[name]
+        } else {
+          progress[name].total += chunk.colors[name].total
+          progress[name].painted += chunk.colors[name].painted
+        }
+      }
+    }
+
+    Overlay.progress.value = Object.fromEntries(Object.entries(progress).sort((a, b) => b[1].total - a[1].total))
+  }
+
   // The data structure of a chunk.
   export interface Chunk {
     hash: string,
     blob: Blob,
-    progress: { [key: string]: Overlay.ColorProgress }
+    colors: { [key: string]: Overlay.ColorProgress }
   }
 
   // The data structure of a color progress.

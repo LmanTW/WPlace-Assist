@@ -80,10 +80,10 @@ namespace Intercept {
             const x = ((tileX - State.image.position.tileX) * 1000) + (data.coords[i] - State.image.position.localX)
             const y = ((tileY - State.image.position.tileY) * 1000) + (data.coords[i + 1] - State.image.position.localY)
 
-            const color = Image.ctx.getImageData(x, y, 1, 1).data
-            const hash = Palette.hashColor(color[0], color[1], color[2])
+            const rgba = Image.ctx.getImageData(x, y, 1, 1).data
+            const hash = Palette.hashColor(rgba[0], rgba[1], rgba[2], rgba[3])
 
-            if (color[3] === 0) {
+            if (rgba[3] === 0) {
               colors.push(0)
               coords.push(data.coords[i], data.coords[i + 1])
             } else {

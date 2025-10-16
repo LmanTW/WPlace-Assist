@@ -5,6 +5,7 @@ import * as lucid from 'lucide-react'
 
 import Language from '../scripts/language'
 import Palette from '../scripts/palette'
+import Overlay from '../scripts/overlay'
 import State from '../scripts/state'
 
 // The control menu component.
@@ -186,8 +187,20 @@ export default () => {
             {Language.translate('controlMenu', 'Select Position')}
           </button>
 
-          <div class='wpa-container-dark wpa-container-small' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '15rem', minHeight: '0rem', padding: 'var(--wpa-spacing-small)', marginBottom: 'var(--wpa-spacing-medium)' }}>
-            <p class='wpa-description'>WIP</p>
+          <div class='wpa-container-dark wpa-container-small' style={{ display: 'flex', flexDirection: 'column', gap: 'var(--wpa-spacing-small)', height: '15rem', minHeight: '0rem', padding: 'var(--wpa-spacing-small)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}>
+          {
+            Object.keys(Overlay.progress.value).map((name) => {
+              const progress = Overlay.progress.value[name]
+              const color = Palette.colors[name]  
+
+              return (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                  <p class='wpa-description'>{name} {Math.round((100 / progress.total) * progress.painted)}% ({progress.painted} / {progress.total})</p>
+                </div>
+              )
+            })
+          }
           </div>
 
           <button class='wpa-button' title={Language.translate('controlMenu', 'Toggle Overlay')} disabled={State.image === null} onClick={() => State.updateSettings({ overlayShow: !State.settings.overlayShow })} style={{ flex: 1, width: '100%', height: '2.25rem', marginBottom: 'var(--wpa-spacing-small)' }}>

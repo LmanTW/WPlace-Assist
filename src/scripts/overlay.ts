@@ -22,8 +22,6 @@ namespace Overlay {
 
   // Render a tile.
   export async function renderTile(tileX: number, tileY: number, image: Blob): Promise<Blob> {
-    const start = performance.now()
-
     if (State.image !== null && State.image.position !== null) {
       const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', await image.arrayBuffer())).toHex();
       const chunkID = `${tileX}-${tileY}` 

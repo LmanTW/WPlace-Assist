@@ -5,10 +5,18 @@
   },
 
   "data": {
-    "controlMenu": {
+    "common": {
+      "Image Config": "Image Config",
+      "Image Statistics": "Image Statistics",
       "User Settings": "User Settings",
-      "Close Panel": "Close Panel",
 
+      "No image is loaded.": "No image is loaded.",
+
+      "Free Colors": "Free Colors",
+      "Paid Colors": "Paid Colors"
+    },
+
+    "controlMenu": {
       "Upload": "Upload",
       "Upload Image": "Upload Image",
       "Edit": "Edit",
@@ -25,11 +33,8 @@
     },
 
     "imageConfig": {
-      "Image Config": "Image Conig",
       "Reset Image Config": "Reset Image Config",
-      "Close Image Config": "Close Image Config",
-
-      "No image is loaded.": "No image is loaded.",
+      "Close Image Config": "Close Image Config", 
 
       "Width": "Width",
       "Height": "Height",
@@ -41,13 +46,22 @@
       "Select All Colors": "Select All Colors",
       "Unselect All": "Unselect All",
       "Unselect All Colors": "Unselect All Colors",
-      "Image Dithering (Smoother Color)": "Image Dithering (Smoother Color)",
-      "Free Colors": "Free Colors",
-      "Paid Colors": "Paid Colors"
+      "Image Dithering (Smoother Color)": "Image Dithering (Smoother Color)"
+    },
+
+    "imageStatistics": {
+      "Close Image Statistics": "Close Image Statistics",
+
+      "Size": "Size",
+      "Position": "Position",
+      "Not Set": "Not Set",
+      "Pixels": "Pixels",
+      "Colors": "Colors",
+      "Progress": "Progress",
+      "Only tiles in your view are calculated, please make sure the whole overlay is visible to get an accurate progress.": "Only tiles in your view are calculated, please make sure the whole overlay is visible to get an accurate progress."
     },
 
     "userSettings": {
-      "User Settings": "User Settings",
       "Reset User Settings": "Reset User Settings",
       "Close User Settings": "Close User Settings",
 
@@ -69,9 +83,7 @@
       "Select All": "Select All",
       "Select All Colors": "Select All Colors",
       "Unselect All": "Unselect All",
-      "Unselect All Colors": "Unselect All Colors",
-      "Free Colors": "Free Colors",
-      "Paid Colors": "Paid Colors"
+      "Unselect All Colors": "Unselect All Colors"
     }
   }
 }

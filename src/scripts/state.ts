@@ -70,10 +70,12 @@ const settings = signal<{
 const layout = signal<{
   controlMenu: boolean,
   imageConfig: boolean
+  imageStatistics: boolean,
   userSettings: boolean
 }>({
   controlMenu: false,
   imageConfig: false,
+  imageStatistics: false,
   userSettings: false
 })
 

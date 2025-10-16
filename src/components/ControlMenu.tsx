@@ -160,12 +160,12 @@ export default () => {
         <div ref={navbarReference} style={{ display: 'flex', alignItems: 'center', gap: 'var(--wpa-spacing-small)', borderBottom: '0.1rem solid var(--wpa-color-container-dark)', padding: 'var(--wpa-spacing-medium)', cursor: (startState === null) ? 'grab' : 'grabbing' }}>
           <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none', pointerEvents: 'none' }}>WPlace Assist</h3>
         
-          <button class='wpa-button' title={Language.translate('controlMenu', 'User Settings')} onClick={() => State.updateLayout({ userSettings: !State.layout.userSettings })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
-            <lucid.Settings size='16'/>
+          <button class='wpa-button' title={Language.translate('common', 'Image Statistics')} onClick={() => State.updateLayout({ imageStatistics: true })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
+            <lucid.ChartColumnIncreasing size='16'/>
           </button>
 
-          <button class='wpa-button' title={Language.translate('controlMenu', 'Close Panel')} onClick={() => State.updateLayout({ controlMenu: false })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
-            <lucid.X size='16'/>
+          <button class='wpa-button' title={Language.translate('common', 'User Settings')} onClick={() => State.updateLayout({ userSettings: true })} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
+            <lucid.Settings size='16'/>
           </button>
         </div>
 
@@ -187,21 +187,11 @@ export default () => {
             {Language.translate('controlMenu', 'Select Position')}
           </button>
 
-          <div class='wpa-container-dark wpa-container-small' style={{ display: 'flex', flexDirection: 'column', gap: 'var(--wpa-spacing-small)', height: '15rem', minHeight: '0rem', padding: 'var(--wpa-spacing-small)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}>
           {
-            Object.keys(Overlay.progress.value).map((name) => {
-              const progress = Overlay.progress.value[name]
-              const color = Palette.colors[name]  
-
-              return (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
-                  <p class='wpa-description'>{name} {Math.round((100 / progress.total) * progress.painted)}% ({progress.painted} / {progress.total})</p>
-                </div>
-              )
-            })
+            <div class='wpa-container-dark wpa-container-small' style={{ height: '15rem', minHeight: '0rem', padding: 'var(--wpa-spacing-medium)', marginBottom: 'var(--wpa-spacing-medium)', overflow: 'auto' }}> 
+              WIP
+            </div> 
           }
-          </div>
 
           <button class='wpa-button' title={Language.translate('controlMenu', 'Toggle Overlay')} disabled={State.image === null} onClick={() => State.updateSettings({ overlayShow: !State.settings.overlayShow })} style={{ flex: 1, width: '100%', height: '2.25rem', marginBottom: 'var(--wpa-spacing-small)' }}>
             {

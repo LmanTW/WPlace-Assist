@@ -167,7 +167,7 @@ export default () => {
       <div ref={backgroundReference} onClick={handleBackgroundClick} style={{ position: 'fixed', display: 'flex', justifyContent: 'center', alignItems: 'center', left: '0rem', top: '0rem', width: '100dvw', height: '100dvh', backdropFilter: 'brightness(0.5) blur(0.5rem)', transition: 'opacity 0.3s', cursor: (State.control.gettingAvailableColors) ? 'wait' : 'pointer', zIndex: 999 }}>
         <div class='wpa-container-light wpa-container-big' style={{ display: 'flex', flexDirection: 'column', width: '40rem', maxHeight: 'calc(100dvh - calc(var(--wpa-spacing-medium) * 2))', cursor: 'default', overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--wpa-spacing-small)', borderBottom: '0.1rem solid var(--wpa-color-container-dark)', padding: 'var(--wpa-spacing-medium)' }}>
-            <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none' }}>{Language.translate('imageConfig', 'Image Config')}</h3>
+            <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none' }}>{Language.translate('common', 'Image Config')}</h3>
 
             <button class='wpa-button' title={Language.translate('imageConfig', 'Reset Image Config')} disabled={State.control.gettingAvailableColors} onClick={resetImageConfig} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
               <lucid.RefreshCcw size='16'/>
@@ -181,13 +181,13 @@ export default () => {
           {
             (State.image === null) ? (
               <div style={{ flex: 1, padding: 'var(--wpa-spacing-medium)' }}>
-                <p class='wpa-description'>{Language.translate('imageConfig', 'No image is loaded.')}</p>
+                <p class='wpa-description'>{Language.translate('common', 'No image is loaded.')}</p>
               </div>
             ) : (
               <div style={{ flex: 1, padding: 'var(--wpa-spacing-medium)', minHeight: '0rem', overflow: 'auto' }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
                   <h5 class='wpa-title-5' style={{ marginRight: 'var(--wpa-spacing-small)' }}>{Language.translate('imageConfig', 'Width')}:</h5>
-                  <div class='wpa-input-text' style={{ flex: 1, display: 'flex', minWidth: '0', marginRight: 'var(--wpa-spacing-medium)' }}>
+                  <div class='wpa-input-text' style={{ flex: 1, display: 'flex', minWidth: '0', marginRight: 'var(--wpa-spacing-small)' }}>
                     <input value={State.image.width} onBlur={(event) => updateImageWidth(parseInt((event.target as HTMLInputElement).value))} style={{ flex: 1, outline: 'none', minWidth: '0' }}/>
                     <p class='wpa-description'>px</p>
                   </div>
@@ -242,7 +242,7 @@ export default () => {
                   <div class='wpa-container-dark wpa-container-small' style={{ flex: 1, minHeight: '0rem', padding: 'var(--wpa-spacing-small)', overflow: 'auto' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <input type='checkbox' class='wpa-input-checkbox' checked={Palette.containFreeColors(State.image.colors)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleFreeColors((event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                      <h5 class='wpa-title-5'>{Language.translate('imageConfig', 'Free Colors')}</h5>
+                      <h5 class='wpa-title-5'>{Language.translate('common', 'Free Colors')}</h5>
                     </div>
 
                     {
@@ -252,7 +252,7 @@ export default () => {
                         return (
                           <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                             <input type='checkbox' class='wpa-input-checkbox' checked={State.image!.colors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                            <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                            <div style={{ flexShrink: 0, backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                             <p class='wpa-description'>{name}</p>
                           </div>
                         )
@@ -263,7 +263,7 @@ export default () => {
                   <div class='wpa-container-dark wpa-container-small' style={{ flex: 1, minHeight: '0rem', padding: 'var(--wpa-spacing-small)', overflow: 'auto' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <input type='checkbox' class='wpa-input-checkbox' checked={Palette.containPaidColors(State.image.colors)} disabled={State.control.gettingAvailableColors} onChange={(event) => togglePaidColors((event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                      <h5 class='wpa-title-5'>{Language.translate('imageConfig', 'Paid Colors')}</h5>
+                      <h5 class='wpa-title-5'>{Language.translate('common', 'Paid Colors')}</h5>
                     </div>
 
                     {
@@ -273,7 +273,7 @@ export default () => {
                         return (
                           <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                             <input type='checkbox' class='wpa-input-checkbox' checked={State.image!.colors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                            <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                            <div style={{ flexShrink: 0, backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                             <p class='wpa-description'>{name}</p>
                           </div>
                         )

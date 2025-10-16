@@ -1,5 +1,6 @@
 import { render } from 'preact'
 
+import ImageStatistics from './components/ImageStatistics'
 import UserSettings from './components/UserSettings'
 import ToolbarIcon from './components/ToolbarIcon'
 import ControlMenu from './components/ControlMenu'
@@ -22,6 +23,7 @@ Theme.loadTheme(State.settings.theme)
 render(<ToolbarIcon/>, container_root)
 render(<ControlMenu/>, document.body.appendChild(document.createElement('div')))
 render(<ImageConfig/>, document.body.appendChild(document.createElement('div')))
+render(<ImageStatistics/>, document.body.appendChild(document.createElement('div')))
 render(<UserSettings/>, document.body.appendChild(document.createElement('div')))
 
 // Mount the toolbar icon component.

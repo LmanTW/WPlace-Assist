@@ -20,6 +20,22 @@ export default () => {
     }
   }
 
+  // Reset the user settings.
+  const resetUserSettings = (): void => {
+    State.updateSettings({
+      language: 'en-US',
+      theme: 'default',
+
+      overlayShow: true,
+      overlayColors: Object.keys(Palette.colors),
+
+      overlayMode: 'image',
+      overlayOpacity: 0.5,
+      backgroundMode: 'map',
+      backgroundOpacity: 1
+    })
+  }
+
   // Update the overlay settings.
   const updateOverlaySettings = (modifications: Partial<typeof State.settings>): void => {
     State.updateSettings(modifications)
@@ -103,9 +119,9 @@ export default () => {
       <div ref={backgroundReference} onClick={handleBackgroundClick} style={{ position: 'fixed', display: 'flex', justifyContent: 'center', alignItems: 'center', left: '0rem', top: '0rem', width: '100dvw', height: '100dvh', backdropFilter: 'brightness(0.5) blur(0.5rem)', transition: 'opacity 0.3s', cursor: 'pointer', zIndex: 999 }}>
         <div class='wpa-container-light wpa-shadow' style={{ display: 'flex', flexDirection: 'column', borderRadius: '1.25rem', width: '40rem', maxHeight: 'calc(100dvh - calc(var(--wpa-spacing-medium) * 2))', cursor: 'default', overflow: 'hidden' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--wpa-spacing-small)', borderBottom: '0.1rem solid var(--wpa-color-container-dark)', padding: 'var(--wpa-spacing-medium)' }}>
-            <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none' }}>{Language.translate('userSettings', 'User Settings')}</h3>
+            <h3 class='wpa-title-3' style={{ flex: 1, userSelect: 'none' }}>{Language.translate('common', 'User Settings')}</h3>
 
-            <button class='wpa-button' title={Language.translate('userSettings', 'Reset User Settings')} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
+            <button class='wpa-button' title={Language.translate('userSettings', 'Reset User Settings')} onClick={resetUserSettings} style={{ width: '2rem', height: '2rem', padding: '0rem' }}>
               <lucid.RefreshCcw size='16'/>
             </button>
 
@@ -199,7 +215,7 @@ export default () => {
               <div style={{ flex: 1, backgroundColor: 'var(--wpa-color-container-dark)', borderRadius: '0.75rem', minHeight: '0rem', padding: 'var(--wpa-spacing-small)', overflow: 'auto' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <input type='checkbox' class='wpa-input-checkbox' checked={Palette.containFreeColors(State.settings.overlayColors)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleFreeColors((event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                  <h5 class='wpa-title-5'>{Language.translate('userSettings', 'Free Colors')}</h5>
+                  <h5 class='wpa-title-5'>{Language.translate('common', 'Free Colors')}</h5>
                 </div>
 
                 {
@@ -209,7 +225,7 @@ export default () => {
                     return (
                       <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                         <input type='checkbox' class='wpa-input-checkbox' checked={State.settings.overlayColors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                        <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                        <div style={{ flexShrink: 0, backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                         <p class='wpa-description'>{name} ({Image.colors[name]})</p>
                       </div>
                     )
@@ -220,7 +236,7 @@ export default () => {
               <div style={{ flex: 1, backgroundColor: 'var(--wpa-color-container-dark)', borderRadius: '0.75rem', minHeight: '0', padding: 'var(--wpa-spacing-small)', overflow: 'auto' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <input type='checkbox' class='wpa-input-checkbox' checked={Palette.containPaidColors(State.settings.overlayColors)} disabled={State.control.gettingAvailableColors} onChange={(event) => togglePaidColors((event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                  <h5 class='wpa-title-5'>{Language.translate('userSettings', 'Paid Colors')}</h5>
+                  <h5 class='wpa-title-5'>{Language.translate('common', 'Paid Colors')}</h5>
                 </div>
 
                 {
@@ -230,7 +246,7 @@ export default () => {
                     return (
                       <div style={{ display: 'flex', alignItems: 'center', marginTop: 'var(--wpa-spacing-tiny)' }}>
                         <input type='checkbox' class='wpa-input-checkbox' checked={State.settings.overlayColors.includes(name)} disabled={State.control.gettingAvailableColors} onChange={(event) => toggleColor(name, (event.target as HTMLInputElement).checked)} style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
-                        <div style={{ backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
+                        <div style={{ flexShrink: 0, backgroundColor: `rgb(${color.rgba.join(',')})`, borderRadius: '0.5rem', width: '1rem', height: '1rem', marginRight: 'var(--wpa-spacing-small)' }}></div>
                         <p class='wpa-wpa-description'>{name} ({Image.colors[name]})</p>
                       </div>
                     )

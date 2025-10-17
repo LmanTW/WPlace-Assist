@@ -19,24 +19,27 @@ self.addEventListener('message', (event) => {
   }
 
   // Find the closest color.
-  function findClosestColor(r: number, g: number, b: number, a: number): Uint8Array {
+  function findClosestColor(r: number, g: number, b: number): Uint8Array {
     if (colorIndex.length > 0) {
       let bestIndex: number = 0
       let bestDistance: number = Infinity
 
       for (let i = 0; i < colorIndex.length; i += 4) {
-        if (a === 0 && colorIndex[i + 3] === 0) {
+        const rMean = (r + colorIndex[i]) / 2
+
+        const rDifference = r - colorIndex[i]
+        const gDifference = g - colorIndex[i + 1]
+        const bDifference = b - colorIndex[i + 2]
+
+        const x = ((512 + rMean) * Math.pow(rDifference, 2)) >> 8
+        const y = 4 * Math.pow(gDifference, 2)
+        const z = ((767 - rMean) * Math.pow(bDifference, 2)) >> 8
+
+        const distance = Math.sqrt(x + y + z)
+
+        if (distance < bestDistance) {
           bestIndex = i
-          bestDistance = 0
-
-          break
-        } else {
-          const distance = (0.3 * Math.pow(r - colorIndex[i], 2)) + (0.59 * Math.pow(g - colorIndex[i + 1], 2)) + (0.11 * Math.pow(b - colorIndex[i + 2], 2))
-
-          if (distance < bestDistance) {
-            bestIndex = i
-            bestDistance = distance
-          }
+          bestDistance = distance
         }
       }
 
@@ -68,29 +71,36 @@ self.addEventListener('message', (event) => {
       if (index > 0 && index < message.data.length) {
         weight[index] += errorR * factor
         weight[index + 1] += errorG * factor
-        weight[index + 1] += errorB * factor
+        weight[index + 2] += errorB * factor
       }
     }
 
-    for (let x = 0 ; x < message.width; x++) {
-      for (let y = 0 ; y < message.height; y++) {
+    for (let y = 0 ; y < message.height; y++) {
+      for (let x = 0 ; x < message.width; x++) {
         const index = ((y * message.width) + x) * 4
 
-        const oldR = weight[index]
-        const oldG = weight[index + 1]
-        const oldB = weight[index + 2]
+        if (weight[index + 3] === 0) {
+          weight[index] = 0
+          weight[index + 1] = 0
+          weight[index + 2] = 0
+        } else {
+          const oldR = weight[index]
+          const oldG = weight[index + 1]
+          const oldB = weight[index + 2]
 
-        const newColor = findClosestColor(oldR, oldG, oldB, weight[index + 3])
-        message.data.set(newColor, index)
+          const newColor = findClosestColor(oldR, oldG, oldB, weight[index + 3])
+          message.data.set(newColor, index)
 
-        const errorR = oldR - newColor[0]
-        const errorG = oldG - newColor[1]
-        const errorB = oldB - newColor[2]
+          const errorR = oldR - newColor[0]
+          const errorG = oldG - newColor[1]
+          const errorB = oldB - newColor[2]
 
-        addError(x + 1, y, errorR, errorG, errorB, 7 / 16);
-        addError(x - 1, y + 1, errorR, errorG, errorB,  3 / 16);
-        addError(x, y + 1, errorR, errorG, errorB,  5 / 16);
-        addError(x - 1, y + 1, errorR, errorG, errorB,  1 / 16);
+          addError(x + 1, y, errorR, errorG, errorB, 7 / 16);
+          addError(x - 1, y + 1, errorR, errorG, errorB,  3 / 16);
+          addError(x, y + 1, errorR, errorG, errorB,  5 / 16);
+          addError(x - 1, y + 1, errorR, errorG, errorB,  1 / 16);
+        }
+ 
       }
     }
   } else {

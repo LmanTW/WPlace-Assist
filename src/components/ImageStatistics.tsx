@@ -46,25 +46,25 @@ export default () => {
               </div>
             ) : (
               <div style={{ flex: 1, padding: 'var(--wpa-spacing-medium)', minHeight: '0rem', overflow: 'auto' }}>
-                <div style={{ display: 'flex', gap: 'var(--wpa-spacing-small)', alignItems: 'center' }}>
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                <div style={{ display: 'flex', gap: 'var(--wpa-spacing-small)', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
                     <lucid.ImageUpscale size='24' style={{ marginRight: 'var(--wpa-spacing-small)' }}></lucid.ImageUpscale>
                     <p class='wpa-description'>{Language.translate('imageStatistics', 'Size')}: {State.image.width} x {State.image.height}</p>
                   </div>
 
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
                     <lucid.MapPin size='24' style={{ marginRight: 'var(--wpa-spacing-small)' }}></lucid.MapPin>
                     <p class='wpa-description'>{Language.translate('imageStatistics', 'Position')}: {(State.image.position === null) ? Language.translate('imageStatistics', 'Not Set') : `${State.image.position.tileX}, ${State.image.position.tileY}, ${State.image.position.localX}, ${State.image.position.localY}`}</p>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 'var(--wpa-spacing-small)', alignItems: 'center' }}>
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                <div style={{ display: 'flex', gap: 'var(--wpa-spacing-small)', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
                     <lucid.Image size='24' style={{ marginRight: 'var(--wpa-spacing-small)' }}></lucid.Image>
                     <p class='wpa-description'>{Language.translate('imageStatistics', 'Pixels')}: {State.image.width * State.image.height}</p>
                   </div>
 
-                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
                     <lucid.Palette size='24' style={{ marginRight: 'var(--wpa-spacing-small)' }}></lucid.Palette>
                     <p class='wpa-description'>{Language.translate('imageStatistics', 'Colors')}: {Object.keys(Image.colors).length}</p>
                   </div>

@@ -32,8 +32,6 @@ export default defineConfig({
 
       closeBundle() {
         if (fs.existsSync('./dist/WPlace-Assist-Standalone.js')) {
-          const source = 'window.addEventListener(\'load\',()=>{' + fs.readFileSync('./dist/WPlace-Assist-Standalone.js', 'utf8').split('\n')[0] + '})'
-
           const lines: string[] = [
             '// ==UserScript==',
             '// @name         WPlace-Assist',
@@ -41,12 +39,16 @@ export default defineConfig({
             `// @version      ${info.version}`,
             '// @author       LmanTW',
             '// @namespace    https://github.com/LmanTW/WPlace-Assist',
+            `// @updateURL    https://github.com/LmanTW/WPlace-Assist/releases/latest/download/WPlace-Assist-Tampermonkey.meta.js`,
+            `// @downloadURL  https://github.com/LmanTW/WPlace-Assist/releases/latest/download/WPlace-Assist-Tampermonkey.user.js`,
             `// @match        https://wplace.live/*`,
+            '// @run-at       document-start',
             '// @unwrap',
             '// ==/UserScript=='
           ] 
 
-          fs.writeFileSync('./dist/WPlace-Assist-Tampermonkey.user.js', lines.join('\n') + '\n\n' + source)
+          fs.writeFileSync('./dist/WPlace-Assist-Tampermonkey.meta.js', lines.join('\n') + '\n')
+          fs.writeFileSync('./dist/WPlace-Assist-Tampermonkey.user.js', lines.join('\n') + '\n\n' + 'window.addEventListener(\'load\',()=>{' + fs.readFileSync('./dist/WPlace-Assist-Standalone.js', 'utf8').split('\n')[0] + '})')
         } 
       }
     }

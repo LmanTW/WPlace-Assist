@@ -72,7 +72,7 @@ window.fetch = async (input: URL | RequestInfo, init?: RequestInit): Promise<Res
       return new Response(await Intercept.interceptTileImage(parseInt(url.pathname.split('/')[4]), parseInt(url.pathname.split('/')[5]), await response.blob()))
     } else if (url.pathname.startsWith('/s0/pixel')) {
       if (url.searchParams.has('x') && url.searchParams.has('y')) {
-        if (State.control.selectPosition) {
+        if (State.control.selectingPosition) {
           if (State.image !== null) {
             State.updateImage({
               position: {
@@ -84,7 +84,7 @@ window.fetch = async (input: URL | RequestInfo, init?: RequestInit): Promise<Res
             })
           }
 
-          State.updateControl({ selectPosition: false })
+          State.updateControl({ selectingPosition: false })
         }
       } else if (init !== undefined && typeof init.body === 'string') {
         const data = Intercept.interceptPixelPlacement(

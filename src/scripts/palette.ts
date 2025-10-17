@@ -1,4 +1,4 @@
-// Utilities for handling color.
+// Everything color releated.
 namespace Palette {
   export const colors: {
     [key: string]: {

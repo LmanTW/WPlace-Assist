@@ -3,6 +3,7 @@ import { StyleTransition } from 'preact-transitioning'
 import { encode, decode } from '@msgpack/msgpack'
 import * as lucid from 'lucide-react'
 
+import Diagnostor from '../scripts/diagnostor'
 import Language from '../scripts/language'
 import Palette from '../scripts/palette'
 import State from '../scripts/state'
@@ -145,6 +146,8 @@ export default () => {
     }
   })
 
+  const diagnostics = Diagnostor.diagnose()
+
   return (
     <StyleTransition
       in={State.layout.controlMenu}
@@ -181,10 +184,33 @@ export default () => {
             </button>
           </div>
 
-          <button class={(State.image !== null && State.image.position === null) ? 'wpa-button wpa-button-primary' : 'wpa-button'} title={Language.translate('controlMenu', 'Select Image Position')} disabled={State.image === null || State.control.selectPosition} onClick={() => State.updateControl({ selectPosition: true })} style={{ flex: 1, width: '100%', marginBottom: 'var(--wpa-spacing-small)' }}>
+          <button class={(State.image !== null && State.image.position === null) ? 'wpa-button wpa-button-primary' : 'wpa-button'} title={Language.translate('controlMenu', 'Select Image Position')} disabled={State.image === null || State.control.selectingPosition} onClick={() => State.updateControl({ selectingPosition: true })} style={{ flex: 1, width: '100%', marginBottom: 'var(--wpa-spacing-small)' }}>
             <lucid.LocateFixed size='20' style={{ marginRight: 'var(--wpa-spacing-small)' }}/>
             {Language.translate('controlMenu', 'Select Position')}
           </button>
+
+          {
+            diagnostics.length > 0 && (
+              <div class='wpa-container-dark wpa-container-small' style={{ display: 'flex', flexDirection: 'column', gap: 'var(--wpa-spacing-small)', padding: 'var(--wpa-spacing-medium)', marginBottom: 'var(--wpa-spacing-medium)' }}>
+                {
+                  diagnostics.map((diagnostic) => {
+                    let label!: string
+
+                    if (diagnostic.type === 'tip') label = 'Tip'
+                    else if (diagnostic.type === 'warning') label = 'Warning'
+                    else if (diagnostic.type === 'error') label = 'Error'
+
+                    return (
+                      <p class='wpa-description' style={{ textWrap: 'wrap' }}>
+                        <span style={{ fontWeight: 600 }}>{label}: </span>
+                        {diagnostic.message}
+                      </p>
+                    )
+                  })
+                }
+              </div>
+            )
+          }
 
           <button class='wpa-button' title={Language.translate('controlMenu', 'Toggle Overlay')} disabled={State.image === null} onClick={() => State.updateSettings({ overlayShow: !State.settings.overlayShow })} style={{ flex: 1, width: '100%', height: '2.25rem', marginBottom: 'var(--wpa-spacing-small)' }}>
             {

@@ -2,6 +2,8 @@ import { encode, decode } from '@msgpack/msgpack'
 import { signal } from '@preact/signals'
 
 import Palette from './palette'
+// import Overlay from './overlay'
+import Theme from './theme'
 
 // TODO: Remove this when TypeScript start including this.
 declare global {
@@ -80,10 +82,10 @@ const layout = signal<{
 })
 
 const control = signal<{
-  selectPosition: boolean,
-  gettingAvailableColors: boolean 
+  selectingPosition: boolean,
+  gettingAvailableColors: boolean
 }>({
-  selectPosition: false,
+  selectingPosition: false,
   gettingAvailableColors: false
 })
 
@@ -109,6 +111,10 @@ export default class {
   // Update the settings.
   public static updateSettings(modifications: Partial<typeof settings.value>): void {
     settings.value = { ...settings.value, ...modifications }
+
+    if (modifications.theme !== undefined) {
+      Theme.loadTheme(modifications.theme)
+    }
 
     localStorage.setItem('wplace-assist-settings', encode(settings.value).toBase64())
   }

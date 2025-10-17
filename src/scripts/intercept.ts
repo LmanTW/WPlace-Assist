@@ -71,11 +71,11 @@ namespace Intercept {
   // Intercept pixel placement.
   export function interceptPixelPlacement(tileX: number, tileY: number, data: Intercept.PlacementData): PlacementData {
     if (State.settings.overlayShow && (State.image !== null && State.image.position !== null)) {
-      const colors: number[] = []
-      const coords: number[] = []
-
       if (tileX >= State.image.position.tileX && tileX < State.image.position.tileX + Math.ceil((State.image.position.localX + State.image.width) / 1000)) {
         if (tileY >= State.image.position.tileY && tileY < State.image.position.tileY + Math.ceil((State.image.position.localY + State.image.height) / 1000)) {
+          const colors: number[] = []
+          const coords: number[] = []
+
           for (let i = 0; i < data.coords.length; i += 2) {
             const x = ((tileX - State.image.position.tileX) * 1000) + (data.coords[i] - State.image.position.localX)
             const y = ((tileY - State.image.position.tileY) * 1000) + (data.coords[i + 1] - State.image.position.localY)
@@ -95,11 +95,13 @@ namespace Intercept {
               }
             }
           }
+
+          data.colors = colors
+          data.coords = coords
+
+          Overlay.updatingTiles.value = true
         }
       }
-
-      data.colors = colors
-      data.coords = coords
     }
 
     return data

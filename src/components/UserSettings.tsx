@@ -39,7 +39,7 @@ export default () => {
   // Update the overlay settings.
   const updateOverlaySettings = (modifications: Partial<typeof State.settings>): void => {
     State.updateSettings(modifications)
-    Overlay.cached = {}
+    Overlay.clearCachedTiles()
   }
 
   // Select the available colors.
@@ -47,7 +47,7 @@ export default () => {
     State.updateControl({ gettingAvailableColors: true })
     
     try {
-      updateOverlaySettings({
+      State.updateSettings({
         overlayColors: await Palette.getAvailableColors()
       })
     } catch (error) {
@@ -70,9 +70,9 @@ export default () => {
         }
       })
 
-      updateOverlaySettings({ overlayColors: colors })
+      State.updateSettings({ overlayColors: colors })
     } else {
-      updateOverlaySettings({ overlayColors: State.settings.overlayColors.filter((name) => Palette.colors[name].paid) })
+      State.updateSettings({ overlayColors: State.settings.overlayColors.filter((name) => Palette.colors[name].paid) })
     }
   }
 
@@ -87,9 +87,9 @@ export default () => {
         }
       })
 
-      updateOverlaySettings({ overlayColors: colors })
+      State.updateSettings({ overlayColors: colors })
     } else {
-      updateOverlaySettings({ overlayColors: State.settings.overlayColors.filter((name) => !Palette.colors[name].paid) })
+      State.updateSettings({ overlayColors: State.settings.overlayColors.filter((name) => !Palette.colors[name].paid) })
     }
   }
 
@@ -99,10 +99,10 @@ export default () => {
       if (!toggle) {
         const index = State.settings.overlayColors.indexOf(name)
 
-        updateOverlaySettings({ overlayColors: [...State.settings.overlayColors.slice(0, index), ...State.settings.overlayColors.slice(index + 1)] })
+        State.updateSettings({ overlayColors: [...State.settings.overlayColors.slice(0, index), ...State.settings.overlayColors.slice(index + 1)] })
       }
     } else if (toggle) {
-      updateOverlaySettings({ overlayColors: [...State.settings.overlayColors, name] })
+      State.updateSettings({ overlayColors: [...State.settings.overlayColors, name] })
     }
   }
 

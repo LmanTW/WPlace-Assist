@@ -1,7 +1,8 @@
+import { batch, signal } from '@preact/signals'
+
 import Palette from './palette'
 import State from './state'
 import Image from './image'
-import { signal } from '@preact/signals'
 
 const tileCanvas = document.createElement('canvas')
 const tileCtx = tileCanvas.getContext('2d')!
@@ -15,10 +16,12 @@ tileCanvas.height = 1000
 tileCtx.imageSmoothingEnabled = false
 overlayCtx.imageSmoothingEnabled = false
 
+let cached: { [key: string]: Overlay.CachedTile } = {}
+
 // Utilities for processing the overlay.
 namespace Overlay {
-  export let cached: { [key: string]: Overlay.Chunk } = {} 
-  export let progress = signal<{ [key: string]: Overlay.ColorProgress }>({})
+  export const progress = signal<{ [key: string]: Overlay.ColorProgress }>({})
+  export const updatingTiles = signal<boolean>(false)
 
   // Render a tile.
   export async function renderTile(tileX: number, tileY: number, image: Blob): Promise<Blob> {
@@ -26,8 +29,8 @@ namespace Overlay {
       const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', await image.arrayBuffer())).toHex();
       const chunkID = `${tileX}-${tileY}` 
 
-      if (Overlay.cached.hasOwnProperty(chunkID) && hash === Overlay.cached[chunkID].hash) {
-        return Overlay.cached[chunkID].blob
+      if (cached.hasOwnProperty(chunkID) && hash === cached[chunkID].hash) {
+        return cached[chunkID].blob
       }
 
       const element = await loadImage(image)
@@ -110,20 +113,21 @@ namespace Overlay {
       URL.revokeObjectURL(element.src)
 
       tileCtx.globalAlpha = State.settings.overlayOpacity
-      tileCtx.drawImage(overlayCanvas, tileCropX, tileCropY, overlayCanvas.width, overlayCanvas.height);
+      tileCtx.drawImage(overlayCanvas, tileCropX, tileCropY, overlayCanvas.width, overlayCanvas.height) 
 
       return new Promise((resolve) => {
         tileCanvas.toBlob((blob) => {
           if (blob === null) {
             resolve(image)
           } else {
-            Overlay.cached[chunkID] = {
+            cached[chunkID] = {
               hash,
               blob,
               colors: Object.fromEntries(Array.from(colorMap.entries()).map((entry) => [Palette.colorNameMap.get(entry[0]), entry[1]]))
             }
 
             Overlay.updateProgress()
+            Overlay.updatingTiles.value = false
 
             return blob
           }
@@ -138,8 +142,8 @@ namespace Overlay {
   export function updateProgress(): void {
     const progress: { [key: string]: Overlay.ColorProgress } = {}
 
-    for (const chunkID of Object.keys(Overlay.cached)) {
-      const chunk = Overlay.cached[chunkID]
+    for (const chunkID of Object.keys(cached)) {
+      const chunk = cached[chunkID]
 
       for (const name of Object.keys(chunk.colors)) {
         if (progress[name] === undefined) {
@@ -154,8 +158,21 @@ namespace Overlay {
     Overlay.progress.value = Object.fromEntries(Object.entries(progress).sort((a, b) => b[1].total - a[1].total))
   }
 
-  // The data structure of a chunk.
-  export interface Chunk {
+  // Clear the cached tiles.
+  export function clearCachedTiles(): void {
+    cached = {}
+
+    batch(() => {
+      Overlay.progress.value = {}
+
+      if (State.image !== null && State.image.position !== null) {
+        Overlay.updatingTiles.value = true
+      }
+    })
+  }
+
+  // The data structure of a cached tile.
+  export interface CachedTile {
     hash: string,
     blob: Blob,
     colors: { [key: string]: Overlay.ColorProgress }

@@ -79,7 +79,7 @@ export default class Image {
               .map((entry) => [Palette.colorNameMap.get(entry[0]), entry[1]])
           )
 
-          Overlay.cached = {}
+          Overlay.clearCachedTiles()
 
           resolve()
         })
@@ -131,9 +131,7 @@ export default class Image {
 
 State.imageSignal.subscribe(async (value) => {
   if (value === null) {
-    batch(() => {
-      image.value = null
-    })
+    batch(() => image.value = null)
 
     Image.hash = null
     Image.eventTarget.dispatchEvent(new Event('load'))

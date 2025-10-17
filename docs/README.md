@@ -38,10 +38,13 @@ WPlace-Assist should work on every browsers that supports [Tampermonkey](https:/
 ## FAQ
 
 > Q: Does this violate the rules?<br>
-> A: Although I personally don't consider this as botting, there's still a chance that this violates the rules. Please use this at your own risk.
+> A: Although I personally don't consider this as botting, there's still a chance that this violates the rules. Judge it yourself, and use it at your own risk.
 
 > Q: How to open WPlace-Assist?<br>
-> A: There's a pointing hand icon on the right side. Click to toggle Wplace-Assist UI.
+> A: There's a pointing hand icon on the right side. Click to toggle the Wplace-Assist interface.
 
 > Q: How to use WPlace-Assist?<br>
-> A: When painting, WPlace-Assist will select the color for you after you have submit the pixels. It might take some time for the tiles to update.
+> A: When painting, WPlace-Assist will select the color for you after you have submited the pixels. It might take some time for the tiles to update.
+
+> Q: How to set the position of the image?<br>
+> A: Click the "Select Position" button and then click on a pixel where you want to place the image.

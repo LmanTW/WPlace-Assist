@@ -21,7 +21,6 @@ let cached: { [key: string]: Overlay.CachedTile } = {}
 // Utilities for processing the overlay.
 namespace Overlay {
   export const progress = signal<{ [key: string]: Overlay.ColorProgress }>({})
-  export const updatingTiles = signal<boolean>(false)
 
   // Render a tile.
   export async function renderTile(tileX: number, tileY: number, image: Blob): Promise<Blob> {
@@ -123,11 +122,12 @@ namespace Overlay {
             cached[chunkID] = {
               hash,
               blob,
-              colors: Object.fromEntries(Array.from(colorMap.entries()).map((entry) => [Palette.colorNameMap.get(entry[0]), entry[1]]))
+
+              colors: Object.fromEntries(Array.from(colorMap.entries()).map((entry) => [Palette.colorNameMap.get(entry[0]), entry[1]])),
+              outdated: true
             }
 
             Overlay.updateProgress()
-            Overlay.updatingTiles.value = false
 
             return blob
           }
@@ -161,21 +161,16 @@ namespace Overlay {
   // Clear the cached tiles.
   export function clearCachedTiles(): void {
     cached = {}
-
-    batch(() => {
-      Overlay.progress.value = {}
-
-      if (State.image !== null && State.image.position !== null) {
-        Overlay.updatingTiles.value = true
-      }
-    })
+    Overlay.progress.value = {}
   }
 
   // The data structure of a cached tile.
   export interface CachedTile {
     hash: string,
     blob: Blob,
+
     colors: { [key: string]: Overlay.ColorProgress }
+    outdated: boolean
   }
 
   // The data structure of a color progress.

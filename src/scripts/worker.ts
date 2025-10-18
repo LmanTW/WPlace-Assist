@@ -88,7 +88,7 @@ self.addEventListener('message', (event) => {
           const oldG = weight[index + 1]
           const oldB = weight[index + 2]
 
-          const newColor = findClosestColor(oldR, oldG, oldB, weight[index + 3])
+          const newColor = findClosestColor(oldR, oldG, oldB)
           message.data.set(newColor, index)
 
           const errorR = oldR - newColor[0]
@@ -105,7 +105,7 @@ self.addEventListener('message', (event) => {
     }
   } else {
     for (let i = 0; i < message.data.length; i += 4) {
-      if (message.data[i + 3] < 255) {
+      if (message.data[i + 3] > 0 && message.data[i + 3] < 255) {
         const alpha = message.data[i + 3] / 255
         const reverseAlpha = (1 - alpha)
         
@@ -115,7 +115,9 @@ self.addEventListener('message', (event) => {
         message.data[i + 3] = 255
       }
 
-      message.data.set(findClosestColor(message.data[i], message.data[i + 1], message.data[i + 2], message.data[i + 3]), i)
+      if (message.data[i + 3] !== 0) {
+        message.data.set(findClosestColor(message.data[i], message.data[i + 1], message.data[i + 2]), i)
+      }
     }
   }
 

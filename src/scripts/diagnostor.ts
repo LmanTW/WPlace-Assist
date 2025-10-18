@@ -1,7 +1,6 @@
 import { signal } from '@preact/signals'
 
 import Language from './language'
-import Overlay from './overlay'
 import State from './state'
 
 // The diagnostor.
@@ -16,9 +15,9 @@ namespace Diagnostor {
       diagnostics.push({ type: 'tip', message: Language.translate('tip', 'Click on a pixel to set the position.') })
     }
 
-    if (Overlay.updatingTiles.value) {
-      diagnostics.push({ type: 'tip', message: Language.translate('tip', 'It might take some time to update the tiles.') })
-    }
+    // if (Overlay.updatingTiles.value) {
+    //  diagnostics.push({ type: 'tip', message: Language.translate('tip', 'It might take some time to update the tiles.') })
+    //}
 
     return diagnostics
   }

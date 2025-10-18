@@ -98,8 +98,6 @@ namespace Intercept {
 
           data.colors = colors
           data.coords = coords
-
-          Overlay.updatingTiles.value = true
         }
       }
     }
@@ -109,11 +107,10 @@ namespace Intercept {
 
   // The data structure of the placement request body.
   export interface PlacementData {
-    colors: number[],
-    coords: number[],
+    fp: string,
 
-    t: string,
-    fp: string
+    colors: number[],
+    coords: number[]
   }
 }
 

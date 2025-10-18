@@ -4,6 +4,10 @@ A userscript for [wplace.live](https://wplace.live/) that makes painting easier 
 
 ![An image of WPlace-Assist running](./assets/demo.png)
 
+# DON'T USE THE SCRIPT
+
+Some core functionality relating to verification is not implemented yet, so there's a higher change you'll get ban if you're using the script at this point in time.
+
 ## Installation
 
 WPlace-Assist should work on every browsers that supports [Tampermonkey](https://www.tampermonkey.net/). If it doesn't, please make sure your browser is up to date, as WPlace-Assist relies on some newer browser features.
